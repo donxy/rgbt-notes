@@ -1,6 +1,6 @@
 @use "./base.scss";
 
-// ===== 自动驾驶 · 前世今生 —— 视觉升级（2026-11-11）=====
+// ===== RGBT 论文分享笔记 —— 视觉层（初版 2026-11-11 随迁移；审阅升级同日）=====
 // 字体：系统栈，标题衬线（编辑感）、正文无衬线；不加载任何网络字体。
 :root {
   --headerFont: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
@@ -208,4 +208,104 @@ footer {
   .hero-title {
     font-size: 1.5rem;
   }
+}
+
+// ===== 审阅升级（2026-11-11，AESTHETIC-AUDIT A 组 3/4/5）=====
+// 栏宽：桌面左 250 / 右 280，整页最大宽 1400（覆盖上游 320/320 与 1500）
+@media (min-width: 1200px) {
+  .page {
+    max-width: 1400px;
+  }
+
+  // 站名在 250px 左栏里收一号，避免折行（Quartz 的 <a> 自带 normal/break-word，要点名压住）
+  .page-title {
+    font-size: 1.3rem;
+  }
+
+  .page-title a {
+    white-space: nowrap;
+  }
+
+  .page > #quartz-body {
+    grid-template-columns: 250px auto 280px;
+  }
+}
+
+// 右栏图谱移到末位后（layout 已重排），高度 250 → 200
+.graph > .graph-outer {
+  height: 200px;
+}
+
+// 首页数字卡的大数字（配合 .note-card 使用）
+.note-card .stat-num {
+  font-family: var(--headerFont);
+  font-size: 1.65rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--dark);
+  margin-bottom: 0.3rem;
+}
+
+// 焦点轮廓：Quartz 复制按钮只删不补，全局补回
+:focus-visible {
+  outline: 2px solid var(--secondary);
+  outline-offset: 2px;
+}
+
+// 页脚链接：移动端点按区加高
+@media (max-width: 800px) {
+  footer a {
+    display: inline-block;
+    padding: 0.55rem 0.25rem;
+  }
+}
+
+// 宽表（对比表 / 数据集总览）：数据网格式呈现 —— 容器内滚动、表头吸顶、首列吸左
+.wide-table {
+  margin: 1rem 0;
+
+  .table-container {
+    max-height: 78vh;
+    overflow: auto;
+    border: 1px solid var(--lightgray);
+    border-radius: 10px;
+  }
+
+  table {
+    font-size: 0.85rem;
+    margin: 0;
+  }
+
+  thead th {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    background-color: color-mix(in srgb, var(--secondary) 12%, var(--light));
+  }
+
+  th:first-child,
+  td:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    background-color: var(--light);
+  }
+
+  thead th:first-child {
+    z-index: 4;
+  }
+
+  td:last-child {
+    min-width: 15rem;
+  }
+}
+
+// REQ-04 判定着色（仅呈现，不改判定文字）
+.yn-yes {
+  color: var(--secondary);
+  font-weight: 700;
+}
+
+.yn-unknown {
+  color: var(--gray);
 }

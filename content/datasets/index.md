@@ -4,6 +4,8 @@ title: "数据集总览"
 
 共 24 个数据集，来自 datasets.csv 单一数据源；每个数据集有独立页面。
 
+<div class="wide-table">
+
 | 数据集 | 分组 | 年份 | 模态 | 规模 | 类别数 | 评测指标 |
 |---|---|---|---|---|---|---|
 | [KAIST](datasets/kaist.md) | general | 2015 | RGB, LWIR | 95K pairs | 1 | LAMR (log-average miss rate over FPPI [1e-2, 1]) |
@@ -30,3 +32,5 @@ title: "数据集总览"
 | [MODA](datasets/moda.md) | aerial | 2026 | RGB, NIR | 13K | 8 |  |
 | [Tri-Modal Dataset](datasets/tri-modal-dataset.md) | aerial | 2026 | RGB, LWIR, Event | 10K | 1 |  |
 | [DRTV30K](datasets/drtv30k.md) | aerial | 2026 | RGB, LWIR | 30K | 9 |  |
+
+</div>
