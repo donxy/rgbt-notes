@@ -1,0 +1,25 @@
+name: Validate Quartz site
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: npm ci
+      - name: Restore upstream Quartz assets
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/jackyzha0/quartz/v4/quartz/static/icon.png -o quartz/static/icon.png
+          curl -fsSL https://raw.githubusercontent.com/jackyzha0/quartz/v4/quartz/static/og-image.png -o quartz/static/og-image.png
+          curl -fsSL https://raw.githubusercontent.com/jackyzha0/quartz/v4/quartz/util/emojimap.json -o quartz/util/emojimap.json
+      - run: npx quartz build

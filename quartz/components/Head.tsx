@@ -82,6 +82,7 @@ export default (() => {
           </>
         )}
 
+        <link rel="stylesheet" href="https://donxy.github.io/design/shared.css" />
         <link rel="icon" href={iconPath} />
         <meta name="description" content={description} />
         <meta name="generator" content="Quartz" />
