@@ -3,7 +3,7 @@
 // ===== RGBT 论文分享笔记 —— 视觉层（初版 2026-11-11 随迁移；审阅升级同日）=====
 // 字体：系统栈，标题衬线（编辑感）、正文无衬线；不加载任何网络字体。
 :root {
-  --headerFont: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+  --headerFont: var(--dn-font-display, "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif);
   --bodyFont: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB",
     "Microsoft YaHei", "Noto Sans SC", "Source Han Sans SC", sans-serif;
   --codeFont: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
@@ -11,12 +11,12 @@
 
 // 正文阅读感：行高与字距为中文长文调校
 article {
-  line-height: 1.78;
-  letter-spacing: 0.012em;
+  line-height: var(--dn-body-line-height, 1.78);
+  letter-spacing: var(--dn-body-tracking, 0.012em);
 
   p,
   li {
-    line-height: 1.78;
+    line-height: var(--dn-body-line-height, 1.78);
   }
 
   // 章节标题：小号章节感 —— 左侧 accent 竖线 + 充足留白
