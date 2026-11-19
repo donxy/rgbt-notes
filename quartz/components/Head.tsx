@@ -31,6 +31,15 @@ export default (() => {
     const socialUrl =
       fileData.slug === "404" ? url.toString() : joinSegments(url.toString(), fileData.slug!)
 
+    // Bilingual (D8 patch): hreflang alternates between the Chinese tree
+    // and the English tree under en/. See MAINTENANCE.md.
+    const rawSlug = fileData.slug!
+    const isEnPage = rawSlug === "en" || rawSlug.startsWith("en/")
+    const zhSlug = isEnPage ? (rawSlug === "en" ? "index" : rawSlug.slice(3)) : rawSlug
+    const enSlug = isEnPage ? rawSlug : rawSlug === "index" ? "en" : `en/${rawSlug}`
+    const altUrl = (s: string) =>
+      `https://${cfg.baseUrl}/${s === "index" ? "" : s.replace(/\/index$/, "")}`
+
     const usesCustomOgImage = ctx.cfg.plugins.emitters.some(
       (e) => e.name === CustomOgImagesEmitterName,
     )
@@ -52,6 +61,13 @@ export default (() => {
         )}
         <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossOrigin="anonymous" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        {rawSlug !== "404" && (
+          <>
+            <link rel="alternate" hrefLang="zh" href={altUrl(zhSlug)} />
+            <link rel="alternate" hrefLang="en" href={altUrl(enSlug)} />
+            <link rel="alternate" hrefLang="x-default" href={altUrl(zhSlug)} />
+          </>
+        )}
 
         <meta name="og:site_name" content={cfg.pageTitle}></meta>
         <meta property="og:title" content={title} />
